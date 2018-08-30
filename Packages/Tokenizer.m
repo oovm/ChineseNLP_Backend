@@ -34,6 +34,24 @@ Begin["`Tokenizer`"];
 Version$Tokenizer = "V1.0";
 Updated$Tokenizer = "2018-08-30";
 (* ::Subsubsection:: *)
+(*功能块 2*)
+TokenizerFormat[l_List] := TokenizerFormat /@ l;
+TokenizerFormat[str_] := Block[
+	{word, tag},
+	{word, tag} = StringSplit[str, "/"];
+	Switch[tag,
+		"v", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Verb"]|>],
+		"n", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Noun"]|>],
+		"a", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Adjective"]|>],
+		"p", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Preposition"]|>],
+		"d", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Adverb"]|>],
+		"nz", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "ProperNoun"]|>],
+		"w", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Punctuation"]|>],
+		"mq", TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "QuantifierPhrase"]|>],
+		_, TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Symbol"]|>]
+	]
+];
+(* ::Subsubsection:: *)
 (*功能块 1*)
 classBasicTokenizer = JavaNew[LoadJavaClass["com.hankcs.hanlp.tokenizer.BasicTokenizer"]];
 BasicTokenizer[str_] := Block[
@@ -59,13 +77,6 @@ NLPTokenizer[str_] := Block[
 	objs = JavaObjectToExpression@classNLPTokenizer@segment[str];
 	Through[objs@toString[]]
 ];
-
-
-
-(* ::Subsubsection:: *)
-(*功能块 2*)
-ExampleFunction[2] = "我就是个示例函数,什么功能都没有";
-
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)
