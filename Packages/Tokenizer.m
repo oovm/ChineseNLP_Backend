@@ -38,8 +38,7 @@ Version$Tokenizer = "V1.0";
 Updated$Tokenizer = "2018-08-30";
 (* ::Subsubsection:: *)
 (*功能块 2*)
-SetDirectory@FileNameJoin[{$NLPData, "HanLP"}];
-JLink`ReinstallJava[JLink`ClassPath -> FileNameJoin[{$NLPData, "HanLP", "HanLP-1.6.8.jar"}]];
+
 TokenizerFormat[l_List] := TokenizerFormat /@ l;
 TokenizerFormat[str_] := Block[
 	{word, tag, register},
