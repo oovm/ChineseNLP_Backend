@@ -35,8 +35,7 @@ Version$Translate = "V1.0";
 Updated$Translate = "2018-08-30";
 (* ::Subsubsection:: *)
 (*功能块 1*)
-SetDirectory@FileNameJoin[{$NLPData, "HanLP"}];
-JLink`ReinstallJava[JLink`ClassPath -> FileNameJoin[{$NLPData, "HanLP", "HanLP-1.6.8.jar"}]];
+
 
 
 ExampleFunction[1] = "我就是个示例函数,什么功能都没有";

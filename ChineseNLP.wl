@@ -1,9 +1,9 @@
 Needs["JLink`"];
-SetOptions[InstallJava, JVMArguments -> "-Xmx2g"];
-SetOptions[ReinstallJava, JVMArguments -> "-Xmx2g"];
+SetOptions[JLink`InstallJava, JLink`JVMArguments -> "-Xmx2g"];
+SetOptions[JLink`ReinstallJava, JLink`JVMArguments -> "-Xmx2g"];
+SetDirectory@FileNameJoin[{$UserBaseDirectory, "ApplicationData", "ChineseNLP","HanLP"}];
+JLink`ReinstallJava[JLink`ClassPath -> "HanLP-1.6.8x.jar"];
 If[!TrueQ[ChineseNLP`PackageScope`Private`$LoadCompleted],
 	<< ChineseNLP`ChineseNLPLoader`
 ];
-SetDirectory@FileNameJoin[{$UserBaseDirectory, "ApplicationData", "ChineseNLP","HanLP"}];
-ReinstallJava[ClassPath -> "HanLP-1.6.8.jar"];
 SetDirectory@$HomeDirectory;
