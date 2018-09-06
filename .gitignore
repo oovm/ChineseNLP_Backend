@@ -12,14 +12,15 @@ docs/.vuepress/public/
 *.txt
 *.bin
 
-# idea 配置文件
-*.iml
-.idea/*
-
-# Eclipse 配置文件
+# idea build 文件
 javaOutput
 target
 build
+*.iml
+.idea/*
+
+# Eclipse build 文件
+.externalToolBuilders/
 .classpath
 .project
 .amateras
@@ -35,3 +36,4 @@ docbuild.xml
 *.zip
 *.rar
 *.7z
+*.jar
