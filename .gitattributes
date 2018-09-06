@@ -10,7 +10,8 @@
 
 # 屏蔽文档与 build 文件统计
 * text=auto
-Documentation/* linguist-documentation
+ChineseNLP/Documentation/* linguist-documentation
+javaSource/* linguist-generated=true
 Packages/*.m linguist-generated=true
 # make things fun lol
 # *.md linguist-language=go
