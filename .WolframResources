@@ -1,0 +1,15 @@
+Resources[
+    Version[1],
+    Sources[
+        Directory["~"]
+    ],
+    Java[
+        Directory["javaOutput"],
+        Directory["ChineseNLP/Resources"]
+    ],
+    ExecutionBuildCommand["<<ChineseNLP`"],
+    Paclet[
+        PacletFolder["ChineseNLP"],
+        FunctionPaclet[False]
+    ]
+]

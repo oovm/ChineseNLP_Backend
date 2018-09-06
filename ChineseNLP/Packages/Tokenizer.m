@@ -95,11 +95,10 @@ GrammaticalUnitHLPCheck := If[
 		# -> Style[#["Name"], 12]& /@ EntityList["GrammaticalUnitHLP"]
 	];
 ];
-
 TokenizerFormat[l_List] := TokenizerFormat /@ l;
 TokenizerFormat[str_] := Block[
 	{word, tag, register},
-	GrammaticalUnitHLPCheck[12];
+	GrammaticalUnitHLPCheck;
 	Quiet[{word, tag} = StringSplit[str, "/"]];
 	TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnitHLP", tag]|>]
 ];

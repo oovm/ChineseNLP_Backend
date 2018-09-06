@@ -6,6 +6,7 @@
 
 ## Introduction
 
+现阶段主要使用现有的库, 以后会逐渐转向原生实现.
 
 - HanLP: https://github.com/hankcs/HanLP
 - Chinese-Word-Vectors: https://github.com/Embedding/Chinese-Word-Vectors

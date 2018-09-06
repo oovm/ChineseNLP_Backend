@@ -16,9 +16,19 @@ docs/.vuepress/public/
 *.iml
 .idea/*
 
+# Eclipse 配置文件
+javaOutput
+target
+build
+.classpath
+.project
+.amateras
+.settings*
+docbuild.xml
+
 # Mathematica 文档
-Documentation/
-Resources/jar/data/
+# Documentation/
+# Resources/jar/data/
 
 # Mathematica 压缩包
 *.WXF

@@ -53,7 +53,7 @@ ExtractNewWord[text_, num_ : 10, len_ : 4, OptionsPattern[]] := Block[
 Options[ExtractKeyWord] := {"Rank" -> False};
 ExtractKeyWord[text_, num_ : 1, OptionsPattern[]] := Block[
 	{objs, getTermAndRank, getKeywordList, keySet, values, toArray},
-	textRankKeyword := textRankKeyword = JLink`JavaNew[JLink`LoadJavaClass["com.hankcs.hanlp.summary.TextRankKeyword"]];
+	textRankKeyword := textRankKeyword = JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
 	If[TrueQ@OptionValue["Rank"],
 		objs = textRankKeyword@getTermAndRank[text, num];
 		AssociationThread[objs@keySet[]@toArray[] -> objs@values[]@toArray[]],
