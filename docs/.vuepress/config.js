@@ -4,7 +4,7 @@ module.exports = {
 		'/': {
 			lang: 'zh-CN',
 			title: 'ChineseNLP',
-			description: 'No game no life ♕'
+			description: 'Mega NLP Tools Kits.'
 		}
 	},
 	head: [
@@ -28,9 +28,9 @@ module.exports = {
 				]
 			},
 			{
-				title: 'MagicSquare 模块',
+				title: '信息提取模块',
 				children: [
-					'/MagicSquare/'
+					'/Extract/'
 				]
 			},
 			{

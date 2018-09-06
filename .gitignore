@@ -32,6 +32,7 @@ docbuild.xml
 # Resources/jar/data/
 
 # Mathematica 压缩包
+ChineseNLP/Resources/
 *.WXF
 *.zip
 *.rar

@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Extract(Extract)*)
+(*信息提取模块(Extract)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
@@ -25,6 +25,7 @@
 ExtractNewWord::usage = "";
 ExtractKeyWord::usage = "";
 ExtractSummary::usage = "";
+ExtractSummaryList::usage = "";
 ExtractPhrase::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
@@ -32,28 +33,23 @@ ExtractPhrase::usage = "";
 (*主设置*)
 Begin["`Extract`"];
 (* ::Subsection::Closed:: *)
-(*主体代码*)
+(*版本信息*)
 Version$Extract = "V1.0";
-Updated$Extract = "2018-09-03";
+Updated$Extract = "2018-09-06";
 (* ::Subsubsection:: *)
-(*功能块 1*)
-
+(*主体代码*)
 Options[ExtractNewWord] = {"Aggregation" -> 100, "Entropy" -> 0.5, "Frequency" -> 0, "Dictionary" -> True};
-ExtractNewWord[text_, num_ : 10, len_ : 4, OptionsPattern[]] := Block[
-	{class, objs, discover, toString, a, e, f, t},
+ExtractNewWord[text_String, num_Integer : 10, len_Integer : 4, OptionsPattern[]] := Block[
+	{objs, discover, toString, a, e, f, t},
 	{f, e, a, t} = OptionValue[{"Frequency", "Entropy", "Aggregation", "Dictionary"}];
-	class = "com.hankcs.hanlp.mining.word.NewWordDiscover";
-	newWordDiscover = JLink`JavaNew[class, len, f, e, a, t];
+	newWordDiscover = JLink`JavaNew["com.hankcs.hanlp.mining.word.NewWordDiscover", len, f, e, a, t];
 	objs = JLink`JavaObjectToExpression@newWordDiscover@discover[text, num];
 	Through[objs@toString[]]
 ];
-
-
-
 Options[ExtractKeyWord] := {"Rank" -> False};
-ExtractKeyWord[text_, num_ : 1, OptionsPattern[]] := Block[
+ExtractKeyWord[text_String, num_Integer : 5, OptionsPattern[]] := Block[
 	{objs, getTermAndRank, getKeywordList, keySet, values, toArray},
-	textRankKeyword := textRankKeyword = JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
+	textRankKeyword := textRankKeyword = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
 	If[TrueQ@OptionValue["Rank"],
 		objs = textRankKeyword@getTermAndRank[text, num];
 		AssociationThread[objs@keySet[]@toArray[] -> objs@values[]@toArray[]],
@@ -61,21 +57,27 @@ ExtractKeyWord[text_, num_ : 1, OptionsPattern[]] := Block[
 		objs@toArray[]
 	]
 ];
-
-ExtractSummary[text_, num_ : 5] := JLink`JavaObjectToExpression[com`hankcs`hanlp`HanLP`extractSummary[text, num]];
-ExtractPhrase[text_, num_ : 5] := JLink`JavaObjectToExpression[com`hankcs`hanlp`HanLP`extractPhrase[text, num]];
-
-
-
-(* ::Subsubsection:: *)
-(*功能块 2*)
-
-
-
+ExtractPhrase[text_String, num_Integer : 5] := Block[
+	{objs, extractPhrase, toArray},
+	phraseExtractor := phraseExtractor = JLink`JavaNew["com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor"];
+	objs = phraseExtractor@extractPhrase[text, num];
+	objs@toArray[]
+];
+ExtractSummary[text_String, len_Integer : 100] := Block[
+	{getSummary},
+	textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
+	textRankSentence@getSummary[text, len]
+];
+ExtractSummaryList[text_String, num_Integer : 5] := Block[
+	{getTopSentenceList, objs, toArray},
+	textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
+	objs = textRankSentence@getTopSentenceList[text, 5];
+	objs@toArray[]
+];
 (* ::Subsection::Closed:: *)
 (*附加设置*)
 SetAttributes[
-	{ },
+	{ExtractNewWord, ExtractKeyWord, ExtractPhrase, ExtractSummary, ExtractSummaryList},
 	{Protected, ReadProtected}
 ];
 End[]

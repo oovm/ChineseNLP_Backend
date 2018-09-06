@@ -20,6 +20,6 @@
 ![JRE](https://img.shields.io/badge/JRE-%3E%3D1.7-green.svg)
 ![UTF8](https://img.shields.io/badge/Encode-UTF8-red.svg)
 
-同时建议 `$UserBaseDirectory` 所在磁盘空间大于2G以存放模型和缓存, 可用内存大于1G以加载模型.
+建议 `$UserBaseDirectory` 所在磁盘空间大于 4G 以存放模型和缓存, 可用内存大于1G以加载模型.
 
 另外部分功能需要用到 Mathematica 深度学习框架, 建议配置独立显卡.
