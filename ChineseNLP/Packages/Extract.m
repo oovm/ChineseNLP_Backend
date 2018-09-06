@@ -40,9 +40,9 @@ Updated$Extract = "2018-09-03";
 
 Options[ExtractNewWord] = {"Aggregation" -> 100, "Entropy" -> 0.5, "Frequency" -> 0, "Dictionary" -> True};
 ExtractNewWord[text_, num_ : 10, len_ : 4, OptionsPattern[]] := Block[
-	{class, newWordDiscover, objs, discover, toString, a, e, f, t},
+	{class, objs, discover, toString, a, e, f, t},
 	{f, e, a, t} = OptionValue[{"Frequency", "Entropy", "Aggregation", "Dictionary"}];
-	class = JLink`LoadJavaClass["com.hankcs.hanlp.mining.word.NewWordDiscover"];
+	class = "com.hankcs.hanlp.mining.word.NewWordDiscover";
 	newWordDiscover = JLink`JavaNew[class, len, f, e, a, t];
 	objs = JLink`JavaObjectToExpression@newWordDiscover@discover[text, num];
 	Through[objs@toString[]]
