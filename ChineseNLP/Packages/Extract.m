@@ -47,9 +47,9 @@ ExtractNewWord[text_String, num_Integer : 10, len_Integer : 4, OptionsPattern[]]
 	Through[objs@toString[]]
 ];
 Options[ExtractKeyWord] := {"Rank" -> False};
+textRankKeyword := textRankKeyword = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
 ExtractKeyWord[text_String, num_Integer : 5, OptionsPattern[]] := Block[
 	{objs, getTermAndRank, getKeywordList, keySet, values, toArray},
-	textRankKeyword := textRankKeyword = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
 	If[TrueQ@OptionValue["Rank"],
 		objs = textRankKeyword@getTermAndRank[text, num];
 		AssociationThread[objs@keySet[]@toArray[] -> objs@values[]@toArray[]],
@@ -57,20 +57,19 @@ ExtractKeyWord[text_String, num_Integer : 5, OptionsPattern[]] := Block[
 		objs@toArray[]
 	]
 ];
+phraseExtractor := phraseExtractor = JLink`JavaNew["com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor"];
 ExtractPhrase[text_String, num_Integer : 5] := Block[
 	{objs, extractPhrase, toArray},
-	phraseExtractor := phraseExtractor = JLink`JavaNew["com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor"];
 	objs = phraseExtractor@extractPhrase[text, num];
 	objs@toArray[]
 ];
+textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
 ExtractSummary[text_String, len_Integer : 100] := Block[
 	{getSummary},
-	textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
 	textRankSentence@getSummary[text, len]
 ];
 ExtractSummaryList[text_String, num_Integer : 5] := Block[
 	{getTopSentenceList, objs, toArray},
-	textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
 	objs = textRankSentence@getTopSentenceList[text, 5];
 	objs@toArray[]
 ];

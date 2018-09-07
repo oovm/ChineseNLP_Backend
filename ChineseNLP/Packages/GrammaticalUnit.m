@@ -190,9 +190,9 @@ GrammaticalUnitHLP := GrammaticalUnitHLP = EntityStore["GrammaticalUnitHLP" -> <
 |>];
 GrammaticalUnitCheck := If[
 	!AssociationQ@NaturalLanguageProcessing`PackageScope`TagNameAssoc,
-	TextElement["Ready", <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Adjective"]|>];
+	Needs["NaturalLanguageProcessing`"];
 	GrammaticalUnitCheck,
-	GrammaticalUnitHLP// EntityRegister;
+	Quiet[GrammaticalUnitHLP // EntityRegister];
 	AssociateTo[
 		NaturalLanguageProcessing`PackageScope`TagNameAssoc,
 		# -> Style[#["Class"], 12]& /@ EntityList["GrammaticalUnitHLP"]
