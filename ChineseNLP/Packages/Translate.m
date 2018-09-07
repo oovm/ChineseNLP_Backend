@@ -39,7 +39,7 @@ Updated$Translate = "2018-08-30";
 
 
 
-pinyinDictionary := pinyinDictionary = JLink`JavaNew["com.hankcs.hanlp.dictionary.py.PinyinDictionary"];
+pinyinDictionary := pinyinDictionary = JavaNew["com.hankcs.hanlp.dictionary.py.PinyinDictionary"];
 DecomposePinyin[str_String] := Block[
 	{
 		objs, decom, convertToPinyinArray, toString,

@@ -43,12 +43,12 @@ Options[ExtractNewWord] = {"Aggregation" -> 100, "Entropy" -> 0.5, "Frequency" -
 ExtractNewWord[text_String, num_Integer : 10, len_Integer : 4, OptionsPattern[]] := Block[
 	{objs, discover, toString, a, e, f, t},
 	{f, e, a, t} = OptionValue[{"Frequency", "Entropy", "Aggregation", "Dictionary"}];
-	newWordDiscover = JLink`JavaNew["com.hankcs.hanlp.mining.word.NewWordDiscover", len, f, e, a, t];
-	objs = JLink`JavaObjectToExpression@newWordDiscover@discover[text, num];
+	newWordDiscover = JavaNew["com.hankcs.hanlp.mining.word.NewWordDiscover", len, f, e, a, t];
+	objs = JavaObjectToExpression@newWordDiscover@discover[text, num];
 	Through[objs@toString[]]
 ];
 Options[ExtractKeyWord] := {"Rank" -> False};
-textRankKeyword := textRankKeyword = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
+textRankKeyword := textRankKeyword = JavaNew["com.hankcs.hanlp.summary.TextRankKeyword"];
 ExtractKeyWord[text_String, num_Integer : 5, OptionsPattern[]] := Block[
 	{objs, getTermAndRank, getKeywordList, keySet, values, toArray},
 	If[TrueQ@OptionValue["Rank"],
@@ -58,13 +58,13 @@ ExtractKeyWord[text_String, num_Integer : 5, OptionsPattern[]] := Block[
 		objs@toArray[]
 	]
 ];
-phraseExtractor := phraseExtractor = JLink`JavaNew["com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor"];
+phraseExtractor := phraseExtractor = JavaNew["com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor"];
 ExtractPhrase[text_String, num_Integer : 5] := Block[
 	{objs, extractPhrase, toArray},
 	objs = phraseExtractor@extractPhrase[text, num];
 	objs@toArray[]
 ];
-textRankSentence := textRankSentence = JLink`JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JLink`JavaNew["java.util.ArrayList"]];
+textRankSentence := textRankSentence = JavaNew["com.hankcs.hanlp.summary.TextRankSentence", JavaNew["java.util.ArrayList"]];
 ExtractSummary[text_String, len_Integer : 100] := Block[
 	{getSummary},
 	textRankSentence@getSummary[text, len]
@@ -79,8 +79,9 @@ tag2entity := If[
 	tag2entity = Dispatch[#["Tag"] -> #& /@ EntityList["HLP"]],
 	tag2entity
 ];
-nShortSegment := nShortSegment = JLink`JavaNew["com.hankcs.hanlp.seg.NShort.NShortSegment"];
-ExtractName[str_] := Block[
+nShortSegment := nShortSegment = JavaNew["com.hankcs.hanlp.seg.NShort.NShortSegment"];
+Options[ExtractName] = {PerformanceGoal -> "Speed"};
+ExtractName[str_String, OptionsPattern[]] := Block[
 	{
 		nameSegment, enableAllNamedEntityRecognize, seg, toArray, toString,
 		objs, gb, sl, names
@@ -88,7 +89,7 @@ ExtractName[str_] := Block[
 	nameSegment = nShortSegment@enableAllNamedEntityRecognize[True];
 	objs = nameSegment@seg[str]@toArray[];
 	gb = GatherBy[StringSplit[#, "/"]& /@ Through[objs@toString[]], Last];
-	sl = Select[Transpose /@ gb, StringTake[#[[-1, -1]], 1] == "n"&];
+	sl = Select[Transpose /@ gb, StringStartsQ[#[[-1, -1]], "n"]&];
 	names = KeyDrop[Association @@ (#[[-1, -1]] -> #[[1]]& /@ sl), {"n", "nf", "ng"}];
 	KeyMap[# /. tag2entity&, names]
 ];
