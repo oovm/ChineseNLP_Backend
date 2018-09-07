@@ -36,65 +36,6 @@ Begin["`Tokenizer`"];
 (*主体代码*)
 Version$Tokenizer = "V1.0";
 Updated$Tokenizer = "2018-08-30";
-(* ::Subsubsection:: *)
-(*GrammaticalUnitHLP*)
-EntityStore["GrammaticalUnitHLP" -> <|
-	"Entities" -> <|
-		"Ag" -> <|"Name" -> "形语素", "Tag" -> "Ag", "Description" -> "形容词性语素。形容词代码为a，语素代码ｇ前面置以A。"|>,
-		"a" -> <|"Name" -> "形容词", "Tag" -> "a", "Description" -> "取英语形容词adjective的第1个字母"|>,
-		"ad" -> <|"Name" -> "副形词", "Tag" -> "ad", "Description" -> "直接作状语的形容词。形容词代码a和副词代码d并在一起。"|>,
-		"an" -> <|"Name" -> "名形词", "Tag" -> "an", "Description" -> "具有名词功能的形容词。形容词代码a和名词代码n并在一起。"|>,
-		"Bg" -> <|"Name" -> "区别语素", "Tag" -> "Bg", "Description" -> "区别词性语素。区别词代码为b，语素代码ｇ前面置以B。"|>,
-		"b" -> <|"Name" -> "区别词", "Tag" -> "b", "Description" -> "取汉字\"别\"的声母。"|>,
-		"c" -> <|"Name" -> "连词", "Tag" -> "c", "Description" -> "取英语连词conjunction的第1个字母。"|>,
-		"Dg" -> <|"Name" -> "副语素", "Tag" -> "Dg", "Description" -> "副词性语素。副词代码为d，语素代码ｇ前面置以D。"|>,
-		"d" -> <|"Name" -> "副词", "Tag" -> "d", "Description" -> "取adverb的第2个字母，因其第1个字母已用于形容词。"|>,
-		"e" -> <|"Name" -> "叹词", "Tag" -> "e", "Description" -> "取英语叹词exclamation的第1个字母。"|>,
-		"f" -> <|"Name" -> "方位词", "Tag" -> "f", "Description" -> "取汉字\"方\"。"|>,
-		"h" -> <|"Name" -> "前接成分", "Tag" -> "h", "Description" -> "取英语head的第1个字母。"|>,
-		"i" -> <|"Name" -> "成语", "Tag" -> "i", "Description" -> "取英语成语idiom的第1个字母。"|>,
-		"j" -> <|"Name" -> "简称略语", "Tag" -> "j", "Description" -> "取汉字\"简\"的声母。"|>,
-		"k" -> <|"Name" -> "后接成分", "Tag" -> "k", "Description" -> "后接成分。"|>,
-		"l" -> <|"Name" -> "习用语", "Tag" -> "l", "Description" -> "习用语尚未成为成语，有点\"临时性\"，取\"临\"的声母。"|>,
-		"Mg" -> <|"Name" -> "数语素", "Tag" -> "Mg", "Description" -> "数词性语素。数词代码为m，语素代码ｇ前面置以M。"|>,
-		"m" -> <|"Name" -> "数词", "Tag" -> "m", "Description" -> "取英语numeral的第3个字母，n，u已有他用。"|>,
-		"Ng" -> <|"Name" -> "名语素", "Tag" -> "Ng", "Description" -> "名词性语素。名词代码为n，语素代码ｇ前面置以N。"|>,
-		"n" -> <|"Name" -> "名词", "Tag" -> "n", "Description" -> "取英语名词noun的第1个字母。"|>,
-		"nr" -> <|"Name" -> "人名", "Tag" -> "nr", "Description" -> "名词代码n和\"人(ren)\"的声母并在一起。"|>,
-		"ns" -> <|"Name" -> "地名", "Tag" -> "ns", "Description" -> "名词代码n和处所词代码s并在一起。"|>,
-		"nt" -> <|"Name" -> "机构团体", "Tag" -> "nt", "Description" -> "\"团\"的声母为t，名词代码n和t并在一起。"|>,
-		"nx" -> <|"Name" -> "外文字符", "Tag" -> "nx", "Description" -> "外文字符。"|>,
-		"nz" -> <|"Name" -> "其他专名", "Tag" -> "nz", "Description" -> "\"专\"的声母的第1个字母为z，名词代码n和z并在一起。"|>,
-		"o" -> <|"Name" -> "拟声词", "Tag" -> "o", "Description" -> "取英语拟声词onomatopoeia的第1个字母。"|>,
-		"p" -> <|"Name" -> "介词", "Tag" -> "p", "Description" -> "取英语介词prepositional的第1个字母。"|>,
-		"q" -> <|"Name" -> "量词", "Tag" -> "q", "Description" -> "取英语quantity的第1个字母。"|>,
-		"Rg" -> <|"Name" -> "代语素", "Tag" -> "Rg", "Description" -> "代词性语素。代词代码为r，在语素的代码g前面置以R。"|>,
-		"r" -> <|"Name" -> "代词", "Tag" -> "r", "Description" -> "取英语代词pronoun的第2个字母，因p已用于介词。"|>,
-		"s" -> <|"Name" -> "处所词", "Tag" -> "s", "Description" -> "取英语space的第1个字母。"|>,
-		"Tg" -> <|"Name" -> "时语素", "Tag" -> "Tg", "Description" -> "时间词性语素。时间词代码为t，在语素的代码g前面置以T。"|>,
-		"t" -> <|"Name" -> "时间词", "Tag" -> "t", "Description" -> "取英语time的第1个字母。"|>,
-		"u" -> <|"Name" -> "助词", "Tag" -> "u", "Description" -> "取英语助词auxiliary。"|>,
-		"Vg" -> <|"Name" -> "动语素", "Tag" -> "Vg", "Description" -> "动词性语素。动词代码为v。在语素的代码g前面置以V。"|>,
-		"v" -> <|"Name" -> "动词", "Tag" -> "v", "Description" -> "取英语动词verb的第一个字母。"|>,
-		"vd" -> <|"Name" -> "副动词", "Tag" -> "vd", "Description" -> "直接作状语的动词。动词和副词的代码并在一起。"|>,
-		"vn" -> <|"Name" -> "名动词", "Tag" -> "vn", "Description" -> "指具有名词功能的动词。动词和名词的代码并在一起。"|>,
-		"w" -> <|"Name" -> "标点符号", "Tag" -> "w", "Description" -> ""|>,
-		"x" -> <|"Name" -> "非语素字", "Tag" -> "x", "Description" -> "非语素字只是一个符号，字母x通常用于代表未知数、符号。"|>,
-		"Yg" -> <|"Name" -> "语气语素", "Tag" -> "Yg", "Description" -> "语气词性语素。语气词代码为y。在语素的代码g前面置以Y。"|>,
-		"y" -> <|"Name" -> "语气词", "Tag" -> "y", "Description" -> "取汉字\"语\"的声母。"|>,
-		"z" -> <|"Name" -> "状态词", "Tag" -> "z", "Description" -> "取汉字\"状\"的声母的前一个字母。"|>
-	|>
-|>
-] // EntityRegister;
-GrammaticalUnitHLPCheck := If[
-	!AssociationQ@NaturalLanguageProcessing`PackageScope`TagNameAssoc,
-	TextElement["Ready", <|"GrammaticalUnit" -> Entity["GrammaticalUnit", "Adjective"]|>];
-	GrammaticalUnitHLPCheck,
-	AssociateTo[
-		NaturalLanguageProcessing`PackageScope`TagNameAssoc,
-		# -> Style[#["Name"], 12]& /@ EntityList["GrammaticalUnitHLP"]
-	];
-];
 TokenizerFormat[l_List] := TokenizerFormat /@ l;
 TokenizerFormat[str_] := Block[
 	{word, tag, register},
