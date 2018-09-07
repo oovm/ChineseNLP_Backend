@@ -11,7 +11,7 @@ module.exports = {
 		['link', {rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css'}]
 	],
 	themeConfig: {
-		repo: 'GalAster/Deus',
+		repo: 'GalAster/ChineseNLP',
 		editLinks: true,
 		docsDir: 'docs',
 		markdown: {
@@ -30,34 +30,28 @@ module.exports = {
 			{
 				title: '信息提取模块',
 				children: [
-					'/Extract/'
+					'/Extracter/'
 				]
 			},
 			{
-				title: 'NumberMaster 模块',
+				title: '分词标注模块',
 				children: [
-					'/NumberMaster/'
+					'/Tokenizer/'
 				]
 			},
 			{
-				title: 'HanoiTower 模块',
+				title: '语言转化模块',
 				children: [
-					'/HanoiTower/'
+					'/Translater/'
 				]
 			},
 			{
-				title: 'Sudoku 模块',
+				title: '句法分析模块',
 				children: [
-					'/Sudoku/',
-					'/Sudoku/Object.md'
+					'/Analyzer/'
 				]
 			}
 		]
 	},
-	serviceWorker: true,
-	markdown: {
-		config: md => {
-			md.use(require("markdown-it-katex"));
-		}
-	}
+	serviceWorker: true
 };

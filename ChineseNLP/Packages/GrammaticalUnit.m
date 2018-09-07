@@ -38,7 +38,7 @@ Updated$GrammaticalUnit = "2018-09-07";
 (*GrammaticalUnitHLP*)
 (* ::Text:: *)
 (*
-  ipt=Import["C:\\Users\\Aster\\OneDrive - mail.ac.id\\Desktop\\Untitled-2.csv",{"CSV","Dataset"},HeaderLines->1];
+  ipt=Import["C:\\Users\\Aster\\OneDrive - mail.ac.id\\Desktop\\HLP 词性标注.csv",{"CSV","Dataset"},HeaderLines->1];
   #Short-><|"Tag"->#Short,"Class"->#Class,"Label"->Text[#Name],"Description"->#Detail|>&/@Normal[ipt];
   StringReplace[ToString[%,InputForm],{"""->"\\\"","""->"\\\""}]
 *)

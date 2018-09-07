@@ -15,7 +15,6 @@ docs/.vuepress/public/
 # idea build 文件
 javaOutput
 target
-build
 *.iml
 .idea/*
 
@@ -28,11 +27,10 @@ build
 docbuild.xml
 
 # Mathematica 文档
-# Documentation/
+build/ChineseNLP/*
 # Resources/jar/data/
 
 # Mathematica 压缩包
-ChineseNLP/Resources/
 *.WXF
 *.zip
 *.rar
