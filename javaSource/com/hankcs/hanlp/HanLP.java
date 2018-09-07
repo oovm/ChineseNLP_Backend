@@ -202,7 +202,7 @@ public class HanLP
         /**
          * 是否执行字符正规化（繁体->简体，全角->半角，大写->小写），切换配置后必须删CustomDictionary.txt.bin缓存
          */
-        public static boolean Normalization = false;
+        public static boolean Normalization = true;
         /**
          * IO适配器（默认null，表示从本地文件系统读取），实现com.hankcs.hanlp.corpus.io.IIOAdapter接口
          * 以在不同的平台（Hadoop、Redis等）上运行HanLP
@@ -364,7 +364,7 @@ public class HanLP
          */
         public static void enableDebug()
         {
-            enableDebug(true);
+            enableDebug(false);
         }
 
         /**

@@ -27,6 +27,7 @@ ExtractKeyWord::usage = "";
 ExtractSummary::usage = "";
 ExtractSummaryList::usage = "";
 ExtractPhrase::usage = "";
+ExtractName::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -72,6 +73,24 @@ ExtractSummaryList[text_String, num_Integer : 5] := Block[
 	{getTopSentenceList, objs, toArray},
 	objs = textRankSentence@getTopSentenceList[text, 5];
 	objs@toArray[]
+];
+tag2entity := If[
+	TrueQ@GrammaticalUnitCheck,
+	tag2entity = Dispatch[#["Tag"] -> #& /@ EntityList["HLP"]],
+	tag2entity
+];
+nShortSegment := nShortSegment = JLink`JavaNew["com.hankcs.hanlp.seg.NShort.NShortSegment"];
+ExtractName[str_] := Block[
+	{
+		nameSegment, enableAllNamedEntityRecognize, seg, toArray, toString,
+		objs, gb, sl, names
+	},
+	nameSegment = nShortSegment@enableAllNamedEntityRecognize[True];
+	objs = nameSegment@seg[str]@toArray[];
+	gb = GatherBy[StringSplit[#, "/"]& /@ Through[objs@toString[]], Last];
+	sl = Select[Transpose /@ gb, StringTake[#[[-1, -1]], 1] == "n"&];
+	names = KeyDrop[Association @@ (#[[-1, -1]] -> #[[1]]& /@ sl), {"n", "nf", "ng"}];
+	KeyMap[# /. tag2entity&, names]
 ];
 (* ::Subsection::Closed:: *)
 (*附加设置*)
