@@ -43,10 +43,10 @@ ChineseNLP 定位不是轻量级工具包, 而是大而全的军械库
 ```yaml
 - ApplicationData/
 - Application/
-	- ChineseNLP/
-		- Kernel/
-		- PacletInfo.m
-		- ChineseNLPLoader.m
+    - ChineseNLP/
+        - Kernel/
+        - PacletInfo.m
+        - ChineseNLPLoader.m
 ```
 
 ## Show Time

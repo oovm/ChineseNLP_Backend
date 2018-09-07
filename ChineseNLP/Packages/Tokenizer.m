@@ -41,56 +41,60 @@ TokenizerFormat[str_String] := Block[
 	{word, tag, register},
 	GrammaticalUnitCheck;
 	Quiet[{word, tag} = StringSplit[str, "/"]];
-	TextElement[word, <|"GrammaticalUnit" -> Entity["GrammaticalUnitHLP", tag]|>]
+	TextElement[word, <|"GrammaticalUnit" -> Entity["HLP", tag]|>]
 ];
 (* ::Subsubsection:: *)
-(*功能块 1*)
+(*Tokenizer*)
 (* ::Text:: *)
-(*BasicTokenizer*)
-classBasicTokenizer := classBasicTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.BasicTokenizer"];
-BasicTokenizer[str_String] := Block[
-	{objs, segment, toString},
-	objs = JavaObjectToExpression@classBasicTokenizer@segment[str];
-	Through[objs@toString[]]
-];
-Options[TokenizerBasic] = {Format -> True};
-TokenizerBasic[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@BasicTokenizer[str], BasicTokenizer[str]];
-(*功能块 1*)
-classStandardTokenizer := classStandardTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.StandardTokenizer"];
-StandardTokenizer[str_String] := Block[
-	{objs, segment, toString},
-	objs = JavaObjectToExpression@classStandardTokenizer@segment[str];
-	Through[objs@toString[]]
-];
-Options[TokenizerStandard] = {Format -> True};
-TokenizerStandard[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@StandardTokenizer[str], StandardTokenizer[str]];
-(*功能块 1*)
-classIndexTokenizer := classIndexTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.IndexTokenizer"];
-IndexTokenizer[str_String] := Block[
-	{objs, segment, toString},
-	objs = JavaObjectToExpression@classIndexTokenizer@segment[str];
-	Through[objs@toString[]]
-];
-Options[TokenizerIndex] = {Format -> True};
-TokenizerIndex[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@IndexTokenizer[str], IndexTokenizer[str]];
-(*功能块 1*)
-classNLPTokenizer := classNLPTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.NLPTokenizer"];
-NLPTokenizer[str_String] := Block[
-	{objs, segment, toString},
-	objs = JavaObjectToExpression@classNLPTokenizer@segment[str];
-	Through[objs@toString[]]
-];
-Options[TokenizerNLP] = {Format -> True};
-TokenizerNLP[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@NLPTokenizer[str], NLPTokenizer[str]];
-(*功能块 1*)
-classNLPTokenizer := classNLPTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.SpeedTokenizer"];
+(*SpeedTokenizer*)
+speedTokenizer := speedTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.SpeedTokenizer"];
 SpeedTokenizer[str_String] := Block[
 	{objs, segment, toString},
-	objs = JavaObjectToExpression@classNLPTokenizer@segment[str];
+	objs = JavaObjectToExpression@speedTokenizer@segment[str];
 	Through[objs@toString[]]
 ];
 Options[TokenizerSpeed] = {Format -> True};
 TokenizerSpeed[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@SpeedTokenizer[str], NLPTokenizer[str]];
+(* ::Text:: *)
+(*BasicTokenizer*)
+basicTokenizer := basicTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.BasicTokenizer"];
+BasicTokenizer[str_String] := Block[
+	{objs, segment, toString},
+	objs = JavaObjectToExpression@basicTokenizer@segment[str];
+	Through[objs@toString[]]
+];
+Options[TokenizerBasic] = {Format -> True};
+TokenizerBasic[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@BasicTokenizer[str], BasicTokenizer[str]];
+(* ::Text:: *)
+(*StandardTokenizer*)
+standardTokenizer := standardTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.StandardTokenizer"];
+StandardTokenizer[str_String] := Block[
+	{objs, segment, toString},
+	objs = JavaObjectToExpression@standardTokenizer@segment[str];
+	Through[objs@toString[]]
+];
+Options[TokenizerStandard] = {Format -> True};
+TokenizerStandard[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@StandardTokenizer[str], StandardTokenizer[str]];
+(* ::Text:: *)
+(*IndexTokenizer*)
+indexTokenizer := indexTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.IndexTokenizer"];
+IndexTokenizer[str_String] := Block[
+	{objs, segment, toString},
+	objs = JavaObjectToExpression@indexTokenizer@segment[str];
+	Through[objs@toString[]]
+];
+Options[TokenizerIndex] = {Format -> True};
+TokenizerIndex[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@IndexTokenizer[str], IndexTokenizer[str]];
+(* ::Text:: *)
+(*NLPTokenizer*)
+nlpTokenizer := nlpTokenizer = JavaNew["com.hankcs.hanlp.tokenizer.NLPTokenizer"];
+NLPTokenizer[str_String] := Block[
+	{objs, segment, toString},
+	objs = JavaObjectToExpression@nlpTokenizer@segment[str];
+	Through[objs@toString[]]
+];
+Options[TokenizerNLP] = {Format -> True};
+TokenizerNLP[str_String, OptionsPattern[]] := If[TrueQ@OptionValue[Format], TokenizerFormat@NLPTokenizer[str], NLPTokenizer[str]];
 (* ::Subsection::Closed:: *)
 (*附加设置*)
 SetAttributes[

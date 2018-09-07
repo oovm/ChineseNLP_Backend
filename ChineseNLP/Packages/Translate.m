@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Translate(Translate)*)
+(*字符转换(Translate)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
@@ -24,28 +24,26 @@
 (*函数说明*)
 DecomposePinyin::usage = "";
 ToPinyin::usage = "";
+ToSimplifiedChinese::usage = "";
+ToTraditionalChinese::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
 (*主设置*)
-ExNumber::usage = "程序包的说明,这里抄一遍";
 Begin["`Translate`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
-Version$Translate = "V1.0";
-Updated$Translate = "2018-08-30";
+Version$Translate = "V1.1";
+Updated$Translate = "2018-09-07";
 (* ::Subsubsection:: *)
-(*功能块 1*)
-
-
-
-pinyinDictionary := pinyinDictionary = JavaNew["com.hankcs.hanlp.dictionary.py.PinyinDictionary"];
+(*Pinyin*)
+toPinyin := toPinyin = JavaNew["com.hankcs.hanlp.dictionary.py.PinyinDictionary"];
 DecomposePinyin[str_String] := Block[
 	{
 		objs, decom, convertToPinyinArray, toString,
 		getShengmu, getYunmu, getTone, getPinyinWithToneMark
 	},
-	objs = pinyinDictionary@convertToPinyinArray[str];
+	objs = toPinyin@convertToPinyinArray[str];
 	decom = {
 		Characters@str,
 		Through[objs@getShengmu[][toString[]]],
@@ -68,13 +66,42 @@ ToPinyin[str_String, mode_Integer : 1] := Block[
 		_, f // Dataset
 	]
 ];
-
-
 (* ::Subsubsection:: *)
-(*功能块 2*)
-ExampleFunction[2] = "我就是个示例函数,什么功能都没有";
-
-
+(*ToSimplified*)
+t2s := t2s = JavaNew["com.hankcs.hanlp.dictionary.ts.TraditionalChineseDictionary"];
+tw2s := tw2s = JavaNew["com.hankcs.hanlp.dictionary.ts.TaiwanToSimplifiedChineseDictionary"];
+hk2s := hk2s = JavaNew["com.hankcs.hanlp.dictionary.ts.HongKongToSimplifiedChineseDictionary"];
+Options[ToSimplifiedChinese] = {Method -> "TW"};
+ToSimplifiedChinese[str_String, OptionsPattern[]] := Block[
+	{
+		convertToSimplifiedChinese,
+		convertToSimplifiedChinese,
+		convertToSimplifiedChinese
+	},
+	Switch[OptionValue[Method],
+		"TW", tw2s@convertToSimplifiedChinese[str],
+		"HK", hk2s@convertToSimplifiedChinese[str],
+		_, t2s@convertToSimplifiedChinese[str]
+	]
+];
+s2t := s2t = JavaNew["com.hankcs.hanlp.dictionary.ts.SimplifiedChineseDictionary"];
+s2tw := s2tw = JavaNew["com.hankcs.hanlp.dictionary.ts.SimplifiedToTaiwanChineseDictionary"];
+s2hk := s2hk = JavaNew["com.hankcs.hanlp.dictionary.ts.SimplifiedToHongKongChineseDictionary"];
+(* ::Subsubsection:: *)
+(*ToTraditional*)
+Options[ToTraditionalChinese] = {Method -> "TW"};
+ToTraditionalChinese[str_String, OptionsPattern[]] := Block[
+	{
+		convertToTraditionalChinese,
+		convertToTraditionalTaiwanChinese,
+		convertToTraditionalHongKongChinese
+	},
+	Switch[OptionValue[Method],
+		"TW", s2tw@convertToTraditionalTaiwanChinese[str],
+		"HK", s2hk@convertToTraditionalHongKongChinese[str],
+		_, s2t@convertToTraditionalChinese[str]
+	]
+];
 (* ::Subsection::Closed:: *)
 (*附加设置*)
 SetAttributes[
