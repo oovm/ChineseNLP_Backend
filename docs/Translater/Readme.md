@@ -60,12 +60,11 @@ ToPinyin["苟利国家生死以,豈因禍福避趨之?", 4]
 ToPinyin["苟利国家生死以,豈因禍福避趨之?", 5]
 ToPinyin["苟利国家生死以,豈因禍福避趨之?", 6]
 ```
-![](https://i.loli.net/2018/09/07/5b929803a4aa3.png)
+![](https://i.loli.net/2018/09/07/5b929803cb16f.png)
 
 ```haskell
 ToPinyin["苟利国家生死以,豈因禍福避趨之?", 7]
 ```
-
-![](https://i.loli.net/2018/09/07/5b929803cb16f.png)
+![](https://i.loli.net/2018/09/07/5b929803a4aa3.png)
 
 实际调用了 `PinyinDecompose` 函数生成一个字典.

@@ -13,6 +13,7 @@ docs/.vuepress/public/
 *.bin
 
 # idea build 文件
+build/resources
 javaOutput
 target
 *.iml

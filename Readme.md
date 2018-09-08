@@ -51,5 +51,10 @@ ChineseNLP 定位不是轻量级工具包, 而是大而全的军械库
 
 ## Show Time
 
+![](https://i.loli.net/2018/09/08/5b938306cb52f.png)
+
+![](https://i.loli.net/2018/09/07/5b929426ade44.png)
+
+![](https://i.loli.net/2018/09/07/5b929803a4aa3.png)
 
 ## License

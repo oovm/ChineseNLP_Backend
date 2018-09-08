@@ -82,8 +82,7 @@ public class WordConfTools {
         conf.clear();
         LOGGER.info("开始加载配置文件");
         long start = System.currentTimeMillis();
-        loadConf("word.conf");
-        loadConf("word.local.conf");
+        loadConf("ysc.properties");
         checkSystemProperties();
         long cost = System.currentTimeMillis() - start;
         LOGGER.info("配置文件加载完毕，耗时"+cost+" 毫秒，配置项数目："+conf.size());
