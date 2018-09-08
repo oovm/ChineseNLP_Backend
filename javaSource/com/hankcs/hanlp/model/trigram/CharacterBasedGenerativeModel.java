@@ -61,7 +61,7 @@ public class CharacterBasedGenerativeModel implements ICacheAble
     {
         tf = new Probability();
         // 构建有限转移矩阵
-        // 矩阵的数值根据《人民日报》语料估算 
+        // 矩阵的数值根据《人民日报》语料估算
         final int [] nullArray = {0, 0, 0, 0, 0};
         transMatrix = new int[5][][];
         transMatrix[0] = new int[][]{nullArray, {0, 150, 330, 0, 0}, {160, 0, 0, 168, 20}, nullArray, nullArray};
@@ -207,9 +207,9 @@ public class CharacterBasedGenerativeModel implements ICacheAble
         for (int i = 2; i < charArray.length; i++)
         {
             // swap(now, pre)
-            double[][] _ = pre;
+            double[][] idd = pre;
             pre = now;
-            now = _;
+            now = idd;
             // end of swap
             for (int s = 0; s < 4; ++s)
             {

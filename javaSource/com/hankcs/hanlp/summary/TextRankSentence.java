@@ -35,7 +35,7 @@ public class TextRankSentence
      */
     final static int max_iter = 200;
     final static double min_diff = 0.001;
-    
+
     final static String default_sentence_separator = "[，,。:：“”？?！!；;]";
     /**
      * 文档句子的个数
@@ -92,7 +92,7 @@ public class TextRankSentence
             vertex[cnt] = 1.0;
             ++cnt;
         }
-        for (int _ = 0; _ < max_iter; ++_)
+        for (int idd = 0; idd < max_iter; ++idd)
         {
             double[] m = new double[D];
             double max_diff = 0;
@@ -169,7 +169,7 @@ public class TextRankSentence
 
     /**
      * 将文章分割为句子
-     *	 
+     *
      * @param document 待分割的文档
      * @param sentence_separator 句子分隔符，正则表达式，如：   [。:？?！!；;]
      * @return
