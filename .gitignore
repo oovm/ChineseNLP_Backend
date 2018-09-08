@@ -17,6 +17,7 @@ javaOutput
 target
 *.iml
 .idea/*
+*.log
 
 # Eclipse build 文件
 .externalToolBuilders/

@@ -22,7 +22,7 @@
 (*这里应该填这个函数的介绍*)
 (* ::Section:: *)
 (*函数说明*)
-DecomposePinyin::usage = "";
+PinyinDecompose::usage = "";
 ToPinyin::usage = "";
 ToSimplifiedChinese::usage = "";
 ToTraditionalChinese::usage = "";
@@ -38,7 +38,7 @@ Updated$Translate = "2018-09-07";
 (* ::Subsubsection:: *)
 (*Pinyin*)
 toPinyin := toPinyin = JavaNew["com.hankcs.hanlp.dictionary.py.PinyinDictionary"];
-DecomposePinyin[str_String] := Block[
+PinyinDecompose[str_String] := Block[
 	{
 		objs, decom, convertToPinyinArray, toString,
 		getShengmu, getYunmu, getTone, getPinyinWithToneMark
@@ -54,7 +54,7 @@ DecomposePinyin[str_String] := Block[
 	<|"Char" -> #1, "Sheng" -> #2, "Yun" -> #3, "Ying" -> #4, "Mark" -> #5|>& @@@ decom
 ];
 ToPinyin[str_String, mode_Integer : 1] := Block[
-	{d = DecomposePinyin[str], f},
+	{d = PinyinDecompose[str], f},
 	f = If[#["Mark"] == "none", # /. {5 -> #["Char"], "none" -> #["Char"]}, #]& /@ d;
 	Switch[mode,
 		1, #Mark& /@ f,
@@ -73,11 +73,7 @@ tw2s := tw2s = JavaNew["com.hankcs.hanlp.dictionary.ts.TaiwanToSimplifiedChinese
 hk2s := hk2s = JavaNew["com.hankcs.hanlp.dictionary.ts.HongKongToSimplifiedChineseDictionary"];
 Options[ToSimplifiedChinese] = {Method -> "TW"};
 ToSimplifiedChinese[str_String, OptionsPattern[]] := Block[
-	{
-		convertToSimplifiedChinese,
-		convertToSimplifiedChinese,
-		convertToSimplifiedChinese
-	},
+	{convertToSimplifiedChinese},
 	Switch[OptionValue[Method],
 		"TW", tw2s@convertToSimplifiedChinese[str],
 		"HK", hk2s@convertToSimplifiedChinese[str],
@@ -105,7 +101,7 @@ ToTraditionalChinese[str_String, OptionsPattern[]] := Block[
 (* ::Subsection::Closed:: *)
 (*附加设置*)
 SetAttributes[
-	{DecomposePinyin, ToPinyin},
+	{PinyinDecompose, ToPinyin},
 	{Protected, ReadProtected}
 ];
 End[]
