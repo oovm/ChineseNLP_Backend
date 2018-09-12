@@ -1,1 +1,0 @@
-Get["ChineseNLP`ChineseNLP`"]; 
