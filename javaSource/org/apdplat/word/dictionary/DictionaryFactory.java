@@ -38,17 +38,18 @@ import java.util.stream.Stream;
 
 /**
  * 词典工厂
- 通过系统属性及配置文件指定词典实现类（dic.class）和词典文件（dic.path）
- 指定方式一，编程指定（高优先级）：
- WordConfTools.set("dic.class", "org.apdplat.word.dictionary.impl.DictionaryTrie");
- WordConfTools.set("dic.path", "classpath:dic.txt");
- 指定方式二，Java虚拟机启动参数（中优先级）：
- java -Ddic.class=org.apdplat.word.dictionary.impl.DictionaryTrie -Ddic.path=classpath:dic.txt
- 指定方式三，配置文件指定（低优先级）：
- 在类路径下的word.conf中指定配置信息
- dic.class=org.apdplat.word.dictionary.impl.DictionaryTrie
- dic.path=classpath:dic.txt
- 如未指定，则默认使用词典实现类（org.apdplat.word.dictionary.impl.DictionaryTrie）和词典文件（类路径下的dic.txt）
+ * 通过系统属性及配置文件指定词典实现类（dic.class）和词典文件（dic.path）
+ * 指定方式一，编程指定（高优先级）：
+ * WordConfTools.set("dic.class", "org.apdplat.word.dictionary.impl.DictionaryTrie");
+ * WordConfTools.set("dic.path", "classpath:dic.txt");
+ * 指定方式二，Java虚拟机启动参数（中优先级）：
+ * java -Ddic.class=org.apdplat.word.dictionary.impl.DictionaryTrie -Ddic.path=classpath:dic.txt
+ * 指定方式三，配置文件指定（低优先级）：
+ * 在类路径下的word.conf中指定配置信息
+ * dic.class=org.apdplat.word.dictionary.impl.DictionaryTrie
+ * dic.path=classpath:dic.txt
+ * 如未指定，则默认使用词典实现类（org.apdplat.word.dictionary.impl.DictionaryTrie）和词典文件（类路径下的dic.txt）
+ *
  * @author 杨尚川
  */
 public final class DictionaryFactory {
@@ -202,15 +203,15 @@ public final class DictionaryFactory {
 	private static void test(String dicClass) throws Exception {
 		WordConfTools.set("dic.class", dicClass);
 		System.gc();
-		Thread.sleep(60000);
+		Thread.sleep(1000);
 		Dictionary dictionary = DictionaryFactory.getDictionary();
 		System.gc();
-		Thread.sleep(60000);
+		Thread.sleep(1000);
 		AtomicInteger h = new AtomicInteger();
 		AtomicInteger e = new AtomicInteger();
-		Stream<String> words = Files.lines(Paths.get("src/test/resources/dic.txt"));
+		Stream<String> words = Files.lines(Paths.get("javaBuild/word/dic.txt"));
 		System.gc();
-		Thread.sleep(60000);
+		Thread.sleep(1000);
 		long start = System.currentTimeMillis();
 		for (int i = 0; i < 100; i++) {
 			words.forEach(word -> {

@@ -49,9 +49,8 @@ public class DictionaryTools {
 
 	public static void main(String[] args) throws IOException {
 		List<String> sources = new ArrayList<>();
-		sources.add("src/main/resources/dic.txt");
-		sources.add("target/dic.txt");
-		String target = "src/main/resources/dic.txt";
+		sources.add("javaBuild/word/dic.txt");
+		String target = "javaBuild/word/dic.txt";
 		merge(sources, target);
 	}
 
